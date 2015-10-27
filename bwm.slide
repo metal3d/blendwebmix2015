@@ -1,0 +1,139 @@
+Golang pour le Web
+La nouvelle tendance pour développer des applications WEB
+28 Oct 2015
+Tags: go, golang, web
+
+Patrice FERLET
+Expert Technique - Chef de Projet Technique - Smile.fr
+pafer@smile.fr
+metal3d@gmail.com
+http://metal3d.org
+@Metal3d
+
+* Qui je suis
+
+Patrice FERLET
+
+Ingénieur Expert Python/PHP (et Go...) chez Smile
+
+.image imgs/logo_smile_france.png
+
+Auteur de quelques outils...
+
+- kwiscale (framework Go en cours de test)
+- vymad (générateur markdown depuis un mindmap)
+- Belphegor (serveur Ghost.py pour générer des images de sites)
+- ...
+
+* Préjugés
+
+* Vous avez l'heure ?
+
+Beaucoup d'entres vous lisent l'heure sur leur smartphone, sur leur PC...
+
+Affichage digital, on est dans l'air du temps ! et pourtant...
+
+* L'horloge est tendance
+
+.image imgs/clock1.jpg _ 200
+.image imgs/clock2.jpg _ 200
+
+
+- Technique != Archaïque
+- Bas niveau != Compliqué
+
+
+* Le langage Go 
+
+* Historique rapide
+
+Développé par des grands noms (qui travaillent chez Google)
+
+- Rob pike
+- Ken Thompson
+- Robert Griesemer
+
+* Pourquoi un nouveau langage ?
+
+- Pour répondre à des problématiques de scallabilité chez Google
+- Parce que le C++ prenait trop de temps à compiler
+- Parce que ça les amusait ?
+
+
+* Dis m'en plus !
+
+Le Go c'est ça:
+
+- Code compilé en binaire natif (Linux, Windows, OSX, BSD...)
+- Des outils pour la "completion", le formatage automatique, la découverte de package, les tests unitaires... fourni !
+- Gestion de tâches concurrentes et communication avec des canaux (on va y venir)
+
+* N'ayez pas peur...
+
+- Pas de classe
+- Pas de constructeur
+- Pas de generics
+- Pas d'héritage
+- Pas d'exception, pas d'annotation, pas de...
+
+- Utilisation de pointeurs...
+
+
+* J'ai dis "n'ayez pas peur"
+
+Tout ces "pas de" sont voulu lors du "design de langage". Le langage répond à vos besoins par d'autres moyens.
+
+- structure avec méthode (ça ressemble aux classes)
+- compositing (ça ressemble à de l'héritage)
+- gestion des erreurs et "recover" (avec un type "error")
+- pointeur *simplifiés* (pas d'algèbre de pointeur)
+- des interfaces
+
+Et surtout:
+
+- des types très utiles (chan, complex, interface)
+- des opérateurs natifs pour itérer, attendre des informations d'une routine
+- une gestion *native* *de* *la* *concurrence* (je l'ai déjà dit non ?)
+
+* L'apprentissage
+
+Le langage est simple, une vingtaine de mots-clef, une sytaxe compréhensible et ça s'intègre facilement dans votre IDE
+
+
+* Ok mais... le rapport avec le Web ?
+
+* L'orientation du langage
+
+Go est vraiment orienté "réseau". Au fur et à mesure, on a eut accès à des "built-in" pour interagir en HTTP.
+
+Prenons un exemple.
+
+.link https://golang.org/pkg/net/http/#HandleFunc
+
+Ou en ligne de commande
+
+    $ go doc http.HandleFunc
+    package http // import "net/http"
+
+    func HandleFunc(pattern string, handler func(ResponseWriter, *Request))
+
+        HandleFunc registers the handler function for the given pattern in the
+        DefaultServeMux. The documentation for ServeMux explains how patterns are
+        matched.
+
+
+* Petit exemple 
+
+.play -numbers -edit src/http1.go
+
+* Golang - la nouvelle tendance pour le web
+
+
+* Le langage
+
+Foo
+
+* HTTP en built-in
+
+Bar
+
