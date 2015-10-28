@@ -35,13 +35,24 @@ Affichage digital, on est dans l'air du temps ! et pourtant...
 
 * L'horloge est tendance
 
-.image imgs/clock1.jpg _ 200
-.image imgs/clock2.jpg _ 200
-
+.image imgs/clock2.jpg _ 300
+.caption Horloge vue sur [[http://www.amazon.fr/Horloge-Murale-moderne-D%C3%A9coratif-D%C3%A9coration/dp/B009NH12EY][amazon.fr]]
 
 - Technique != Archaïque
-- Bas niveau != Compliqué
+- Technique != Compliqué
 
+* Ce que je veux dire
+
+Go est considéré comme technique, mais il est pourtant très moderne et simple.
+
+- 20 mots clefs environ
+- « Convention over configuration »
+- Vous allez enfin utiliser vos "cores" de CPU
+- Vous vous penchez sur le code, l'algorithme, et non pas l'implémentation
+
+« *Less* *is* *exponentialy* *more* » 
+
+.link http://commandcenter.blogspot.fr/2012/06/less-is-exponentially-more.html - Rob Pike
 
 * Le langage Go 
 
@@ -53,16 +64,20 @@ Développé par des grands noms (qui travaillent chez Google)
 - Ken Thompson
 - Robert Griesemer
 
+Depuis 2007, délivré en 2009
+
+Et très important: version 1.x en *Long* *Time* *Support*
+
 * Pourquoi un nouveau langage ?
 
-- Pour répondre à des problématiques de scallabilité chez Google
+- De base, un projet de recherche pur et simple
 - Parce que le C++ prenait trop de temps à compiler
-- Parce que ça les amusait ?
+- Parce que (nativement) le C++ ne sait pas gérer la concurrence
+- Pour répondre à des problématiques de scallabilité chez Google
 
+* Et au final
 
-* Dis m'en plus !
-
-Le Go c'est ça:
+Le Go est né:
 
 - Code compilé en binaire natif (Linux, Windows, OSX, BSD...)
 - Des outils pour la "completion", le formatage automatique, la découverte de package, les tests unitaires... fourni !
@@ -75,11 +90,10 @@ Le Go c'est ça:
 - Pas de generics
 - Pas d'héritage
 - Pas d'exception, pas d'annotation, pas de...
-
 - Utilisation de pointeurs...
 
 
-* J'ai dis "n'ayez pas peur"
+* J'ai dit "n'ayez pas peur"
 
 Tout ces "pas de" sont voulu lors du "design de langage". Le langage répond à vos besoins par d'autres moyens.
 
@@ -88,29 +102,59 @@ Tout ces "pas de" sont voulu lors du "design de langage". Le langage répond à 
 - gestion des erreurs et "recover" (avec un type "error")
 - pointeur *simplifiés* (pas d'algèbre de pointeur)
 - des interfaces
-
-Et surtout:
-
 - des types très utiles (chan, complex, interface)
 - des opérateurs natifs pour itérer, attendre des informations d'une routine
 - une gestion *native* *de* *la* *concurrence* (je l'ai déjà dit non ?)
-
-* L'apprentissage
-
-Le langage est simple, une vingtaine de mots-clef, une sytaxe compréhensible et ça s'intègre facilement dans votre IDE
+- des packages (pas de headers)
 
 
-* Ok mais... le rapport avec le Web ?
+* Hello world
+
+Rien de tel pour montrer la base:
+
+.play -numbers src/hello.go
+
+
+* Concurrence
+
+J'en parle, mais je vous ai pas montré:
+
+.play -numbers src/routine.go
+
+* IDE et ecosystème
+
+Intégration facile dans vim, emacs, intelliJ, eclipse, et bien d'autres...
+
+Un IDE (indépendant) nommé LiteIDE spécialisé pour Go, avec debugger interactif
+
+.link https://github.com/visualfc/liteide
+
+- un SDK fourni (http, net, encrypt, json, etc...)
+- des commandes pour formater le code, pour voir la doc (html, terminal, ...)
+- outil de test intégré au SDK
+- des "mocks" fournis
+- un outil de téléchargement/installation de paquet qui gère git, bazaar et mercurial
+- ...
+
+* Dans vim
+
+.image imgs/vim.png
+
+* Dans eclipse
+
+.image imgs/eclipse.png
+.caption Capture le site [[http://www.finalhack.com/2013/04/first-impressions-go-golang.html][FinalHack.com]]
+
+* Ok mais... et donc, le Web ?
 
 * L'orientation du langage
 
-Go est vraiment orienté "réseau". Au fur et à mesure, on a eut accès à des "built-in" pour interagir en HTTP.
+Go est fortement orienté "réseau". Par effet de chaine, on a accès à des "built-in" pour interagir en HTTP.
 
-Prenons un exemple.
+Prenons un exemple, répondre à un appel HTTP. La documentation utile ici est:
 
 .link https://golang.org/pkg/net/http/#HandleFunc
 
-Ou en ligne de commande
 
     $ go doc http.HandleFunc
     package http // import "net/http"
@@ -126,14 +170,76 @@ Ou en ligne de commande
 
 .play -numbers -edit src/http1.go
 
-* Golang - la nouvelle tendance pour le web
+* Des frameworks ?
+
+Il en existe déjà beaucoup:
+
+- Martini
+- Revel
+- Beegoo
+- GorillaToolKit
+
+* Exemple avec Martini
+
+.play src/martinitest/main.go
+
+* Et niveau DB ?
+
+Il existe des connecteurs pour preque toutes les bases (MySQL/MariaDB, Sqlite, Postgre, Mongo)
+
+Il existe des ORM comme Gorm, beedb, upper.io
+
+* Une petite api REST en martini + mongo
+
+* Le package "data"
+
+.code src/martinirest/data/mongo.go
 
 
-* Le langage
+* Le package "data"
 
-Foo
+On défini un livre:
 
-* HTTP en built-in
+.code src/martinirest/data/dataset.go /START STRUCT/,/END STRUCT/
 
-Bar
+* Le package "data"
 
+La sauvegarde d'un livre:
+
+.code src/martinirest/data/dataset.go /START BOOKSAVE/,/END BOOKSAVE/
+
+* Le package "data"
+
+Récupération en base:
+
+.code src/martinirest/data/dataset.go /START BOOKGET/,/END BOOKGET/
+
+* Le code principal
+
+Dans le package main, je définis mes "endpoints".
+
+D'abord, le GET:
+
+.code src/martinirest/main.go /START GET/,/END GET/
+
+* Le code principal
+
+Je définis le "endpoint" qui recevra un "POST":
+
+.code src/martinirest/main.go /START POST/,/END POST/
+
+* Et pour les templates ?
+
+En built-in, un moteur très simple mais efficace
+
+Sinon, Pongo2 (proche de Jinja2 ou Twig), Ace, ...
+
+* Expériences
+
+- mon blog, codé avec mon framework
+- API pour une interface AngularJS
+- un outil de pomodoro (avec websockets)
+- un outil de création de diagramme UML interactif
+- freshwind - serveur auto-rafraichi comme le fait "livereload"
+
+* Des questions ?
