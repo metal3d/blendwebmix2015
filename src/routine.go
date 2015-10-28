@@ -6,6 +6,7 @@ import (
 	"time"
 )
 
+// START C OMIT
 func Calc(i int) {
 	fmt.Printf("Je suis la routine %d et je calcule\n", i)
 	time.Sleep(1 * time.Second)
@@ -18,3 +19,4 @@ func main() {
 	}
 	// time.Sleep(1.1e9)
 }
+// END C OMIT

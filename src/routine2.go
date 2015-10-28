@@ -6,37 +6,20 @@ import (
 	"time"
 )
 
-func InfiniteLoop(stop chan int) chan int {
-	c := make(chan int)
-	i := 0
-	go func() {
-		for ; ; i++ {
-			select {
-			case <-stop:
-				fmt.Println("On me demande de couper, je ferme")
-				close(c)
-				return
-			default:
-				c <- i
-				time.Sleep(500 * time.Millisecond)
-			}
-		}
-	}()
-	return c
+// START C OMIT
+func Calc(i int, c chan int) { // HL
+	fmt.Printf("Je suis la routine %d et je calcule\n", i)
+	time.Sleep(1 * time.Second)
+	c <- i // HL
 }
 
 func main() {
-	stop := make(chan int)
-	c := InfiniteLoop(stop)
-
-	fmt.Println("Je me met en attente")
-
-	go func() {
-		time.Sleep(2 * time.Second)
-		stop <- 1
-	}()
-	for v := range c {
-		fmt.Println("Recu", v)
+	c := make(chan int) // HL
+	for i := 1; i < 5; i++ {
+		go Calc(i, c) // HL
 	}
-
+	for i := 1; i < 5; i++ {
+		fmt.Println("Fin de la tâche", <-c) // HL
+	}	
 }
+// END C OMIT

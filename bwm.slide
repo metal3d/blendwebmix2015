@@ -25,23 +25,7 @@ Auteur de quelques outils...
 - Belphegor (serveur Ghost.py pour générer des images de sites)
 - ...
 
-* Préjugés
-
-* Vous avez l'heure ?
-
-Beaucoup d'entres vous lisent l'heure sur leur smartphone, sur leur PC...
-
-Affichage digital, on est dans l'air du temps ! et pourtant...
-
-* L'horloge est tendance
-
-.image imgs/clock2.jpg _ 300
-.caption Horloge vue sur [[http://www.amazon.fr/Horloge-Murale-moderne-D%C3%A9coratif-D%C3%A9coration/dp/B009NH12EY][amazon.fr]]
-
-- Technique != Archaïque
-- Technique != Compliqué
-
-* Ce que je veux dire
+* Les préjugés
 
 Go est considéré comme technique, mais il est pourtant très moderne et simple.
 
@@ -50,7 +34,7 @@ Go est considéré comme technique, mais il est pourtant très moderne et simple
 - Vous allez enfin utiliser vos "cores" de CPU
 - Vous vous penchez sur le code, l'algorithme, et non pas l'implémentation
 
-« *Less* *is* *exponentialy* *more* » 
+« *less*is*exponentially*more* » 
 
 .link http://commandcenter.blogspot.fr/2012/06/less-is-exponentially-more.html - Rob Pike
 
@@ -68,20 +52,27 @@ Depuis 2007, délivré en 2009
 
 Et très important: version 1.x en *Long* *Time* *Support*
 
-* Pourquoi un nouveau langage ?
-
 - De base, un projet de recherche pur et simple
 - Parce que le C++ prenait trop de temps à compiler
-- Parce que (nativement) le C++ ne sait pas gérer la concurrence
 - Pour répondre à des problématiques de scallabilité chez Google
 
-* Et au final
+* En bref
 
-Le Go est né:
+Go en 3 points:
 
 - Code compilé en binaire natif (Linux, Windows, OSX, BSD...)
-- Des outils pour la "completion", le formatage automatique, la découverte de package, les tests unitaires... fourni !
+- Des outils pour la "completion", le formatage automatique, génération de documentation, tests unitaires... tout là !
 - Gestion de tâches concurrentes et communication avec des canaux (on va y venir)
+
+* Qui l'utilise ?
+
+Apcera, Bitbucket, bitly, Canonical, CloudFlare, Core OS, Digital Ocean, Docker, Dropbox, Facebook, Getty Images, GitHub, Heroku, Iron.io, Kubernetes, Medium, MongoDB services, Mozilla services, New York Times, pool.ntp.org, Secret, SmugMug, SoundCloud, Stripe, Square, Thomson Reuters, Tumblr, ...
+
+Voir: 
+
+.link golang.org/wiki/GoUsers
+
+(liste tiré de http://talks.golang.org/2015/go-for-java-programmers.slide)
 
 * N'ayez pas peur...
 
@@ -92,10 +83,15 @@ Le Go est né:
 - Pas d'exception, pas d'annotation, pas de...
 - Utilisation de pointeurs...
 
+* ...
+
+.image imgs/peur.jpg
 
 * J'ai dit "n'ayez pas peur"
 
-Tout ces "pas de" sont voulu lors du "design de langage". Le langage répond à vos besoins par d'autres moyens.
+C'est *voulu*. 
+
+Le langage répond à vos besoins par d'autres moyens.
 
 - structure avec méthode (ça ressemble aux classes)
 - compositing (ça ressemble à de l'héritage)
@@ -104,7 +100,6 @@ Tout ces "pas de" sont voulu lors du "design de langage". Le langage répond à 
 - des interfaces
 - des types très utiles (chan, complex, interface)
 - des opérateurs natifs pour itérer, attendre des informations d'une routine
-- une gestion *native* *de* *la* *concurrence* (je l'ai déjà dit non ?)
 - des packages (pas de headers)
 
 
@@ -117,9 +112,17 @@ Rien de tel pour montrer la base:
 
 * Concurrence
 
-J'en parle, mais je vous ai pas montré:
+On peut lancer des tâche en concurrence (qui peuvent tourner en parallèle).
 
-.play -numbers src/routine.go
+.play -numbers src/routine.go /START C/,/END C/
+
+* Concurrence
+
+« Don't communicate by sharing memory; share memory by communicating. »
+
+.play -numbers src/routine2.go /START C/,/END C/
+
+
 
 * IDE et ecosystème
 
@@ -136,35 +139,7 @@ Un IDE (indépendant) nommé LiteIDE spécialisé pour Go, avec debugger interac
 - un outil de téléchargement/installation de paquet qui gère git, bazaar et mercurial
 - ...
 
-* Dans vim
-
-.image imgs/vim.png
-
-* Dans eclipse
-
-.image imgs/eclipse.png
-.caption Capture le site [[http://www.finalhack.com/2013/04/first-impressions-go-golang.html][FinalHack.com]]
-
 * Ok mais... et donc, le Web ?
-
-* L'orientation du langage
-
-Go est fortement orienté "réseau". Par effet de chaine, on a accès à des "built-in" pour interagir en HTTP.
-
-Prenons un exemple, répondre à un appel HTTP. La documentation utile ici est:
-
-.link https://golang.org/pkg/net/http/#HandleFunc
-
-
-    $ go doc http.HandleFunc
-    package http // import "net/http"
-
-    func HandleFunc(pattern string, handler func(ResponseWriter, *Request))
-
-        HandleFunc registers the handler function for the given pattern in the
-        DefaultServeMux. The documentation for ServeMux explains how patterns are
-        matched.
-
 
 * Petit exemple 
 
@@ -172,12 +147,18 @@ Prenons un exemple, répondre à un appel HTTP. La documentation utile ici est:
 
 * Des frameworks ?
 
-Il en existe déjà beaucoup:
+Il en existe déjà beaucoup.
+
+Les plus connus:
 
 - Martini
 - Revel
 - Beegoo
 - GorillaToolKit
+
+Le moins connu de tous:
+
+- Kwiscale :)
 
 * Exemple avec Martini
 
@@ -191,7 +172,18 @@ Il existe des ORM comme Gorm, beedb, upper.io
 
 * Une petite api REST en martini + mongo
 
+* Structure de projet
+
+	.
+	├── data
+	│   ├── dataset.go
+	│   └── mongo.go
+	└── main.go
+
+
 * Le package "data"
+
+data/mongo.go
 
 .code src/martinirest/data/mongo.go
 
@@ -200,11 +192,15 @@ Il existe des ORM comme Gorm, beedb, upper.io
 
 On défini un livre:
 
+data/dataset.go
+
 .code src/martinirest/data/dataset.go /START STRUCT/,/END STRUCT/
 
 * Le package "data"
 
 La sauvegarde d'un livre:
+
+data/dataset.go
 
 .code src/martinirest/data/dataset.go /START BOOKSAVE/,/END BOOKSAVE/
 
@@ -212,11 +208,13 @@ La sauvegarde d'un livre:
 
 Récupération en base:
 
+data/dataset.go
+
 .code src/martinirest/data/dataset.go /START BOOKGET/,/END BOOKGET/
 
 * Le code principal
 
-Dans le package main, je définis mes "endpoints".
+Dans le package « main », je définis mes "endpoints".
 
 D'abord, le GET:
 
@@ -243,3 +241,10 @@ Sinon, Pongo2 (proche de Jinja2 ou Twig), Ace, ...
 - freshwind - serveur auto-rafraichi comme le fait "livereload"
 
 * Des questions ?
+
+Pour les autres, notez ces liens:
+
+.link http://golang.org
+.link http://gopkg.in/mgo.v2
+.link https://revel.github.io
+.link http://martini.codegangsta.io

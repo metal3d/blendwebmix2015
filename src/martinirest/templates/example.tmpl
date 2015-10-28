@@ -1,0 +1,29 @@
+<!doctype html>
+<html>
+<head>
+
+    <style>
+    html, body {
+        font-family: Sans;
+        margin: 0;
+        padding: 0;
+    }
+    main {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    </style>
+
+</head>
+<body>
+
+    <main>
+        <h1>{{ .Title }}</h1>
+        <p>
+            <em>Par: {{.Author}}</em>
+        </p>
+        <p>Publié le: {{.Published.Format "02/01/2006" }}</p>
+    </main>
+</body>
+</html>
