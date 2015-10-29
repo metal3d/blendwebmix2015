@@ -61,7 +61,7 @@ Et très important: version 1.x en *Long* *Time* *Support*
 Go en 3 points:
 
 - Code compilé en binaire natif (Linux, Windows, OSX, BSD...)
-- Des outils pour la "completion", le formatage automatique, génération de documentation, tests unitaires... tout là !
+- Des outils pour la "completion", le formatage automatique, génération de documentation, tests unitaires... tout est là !
 - Gestion de tâches concurrentes et communication avec des canaux (on va y venir)
 
 * Qui l'utilise ?
@@ -72,7 +72,7 @@ Voir:
 
 .link golang.org/wiki/GoUsers
 
-(liste tiré de http://talks.golang.org/2015/go-for-java-programmers.slide)
+(liste tirée de http://talks.golang.org/2015/go-for-java-programmers.slide)
 
 * N'ayez pas peur...
 
@@ -93,10 +93,10 @@ C'est *voulu*.
 
 Le langage répond à vos besoins par d'autres moyens.
 
-- structure avec méthode (ça ressemble aux classes)
+- structures avec méthodes (ça ressemble aux classes)
 - compositing (ça ressemble à de l'héritage)
 - gestion des erreurs et "recover" (avec un type "error")
-- pointeur *simplifiés* (pas d'algèbre de pointeur)
+- pointeurs *simplifiés* (pas d'algèbre de pointeur)
 - des interfaces
 - des types très utiles (chan, complex, interface)
 - des opérateurs natifs pour itérer, attendre des informations d'une routine
@@ -112,7 +112,7 @@ Rien de tel pour montrer la base:
 
 * Concurrence
 
-On peut lancer des tâche en concurrence (qui peuvent tourner en parallèle).
+On peut lancer des tâches en concurrence (qui peuvent tourner en parallèle).
 
 .play -numbers src/routine.go /START C/,/END C/
 
@@ -134,7 +134,7 @@ Un IDE (indépendant) nommé LiteIDE spécialisé pour Go, avec debugger interac
 
 - un SDK fourni (http, net, encrypt, json, etc...)
 - des commandes pour formater le code, pour voir la doc (html, terminal, ...)
-- outil de test intégré au SDK
+- outils de test intégré au SDK
 - des "mocks" fournis
 - un outil de téléchargement/installation de paquet qui gère git, bazaar et mercurial
 - ...
@@ -166,7 +166,7 @@ Le moins connu de tous:
 
 * Et niveau DB ?
 
-Il existe des connecteurs pour preque toutes les bases (MySQL/MariaDB, Sqlite, Postgre, Mongo)
+Il existe des connecteurs pour presque toutes les bases (MySQL/MariaDB, Sqlite, Postgre, Mongo)
 
 Il existe des ORM comme Gorm, beedb, upper.io
 

@@ -15,8 +15,11 @@ func Calc(i int) {
 
 func main() {
 	for i := 1; i < 5; i++ {
+		// ajoutez "go" devant Calc
 		Calc(i)
 	}
+	// Décommentez:
 	// time.Sleep(1.1e9)
 }
+
 // END C OMIT

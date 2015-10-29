@@ -75,7 +75,7 @@
 
   .slides > article:after {
     content: "";
-    background: #e85c1a url(/static/logo_smile_france2.png) no-repeat calc(100% - 20px) 50%;
+    /*background: #e85c1a url(/static/logo_smile_france2.png) no-repeat calc(100% - 20px) 50%;*/
     width: 100%;
     height: 52px;
     position: absolute;
@@ -247,7 +247,7 @@
 
   .slides > article > .footer {
     position: absolute;
-    background: #e85c1a url(/static/logo_smile_france2.png) no-repeat calc(100% - 20px) 50%;
+    /*background: #e85c1a url(/static/logo_smile_france2.png) no-repeat calc(100% - 20px) 50%;*/
     width: 100%;
     height: 52px;
     background-size: 118px;
